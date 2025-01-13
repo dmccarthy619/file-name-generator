@@ -148,8 +148,10 @@ def generate_file_name(person, description, date_submitted, additional_info, dat
     if additional_info and not re.match(r'^[a-zA-Z0-9 ]*$', additional_info):
         return "Fehler: Zusätzliche Info darf nur Buchstaben, Zahlen und Leerzeichen enthalten."
     
-    additional_info = additional_info.replace(" ", "-")  # Replace spaces with dashes
-
+    # Replace spaces with dashes in description and additional_info
+    description = description.replace(" ", "-")
+    additional_info = additional_info.replace(" ", "-")
+    
     if date_of_document:
         if additional_info:
             return f"{person}_{description}_{date_submitted}_{additional_info}_von-{date_of_document}"
@@ -160,6 +162,7 @@ def generate_file_name(person, description, date_submitted, additional_info, dat
             return f"{person}_{description}_{date_submitted}_{additional_info}"
         else:
             return f"{person}_{description}_{date_submitted}"
+
 
 # Streamlit App
 st.title("Dateiname Generator")
